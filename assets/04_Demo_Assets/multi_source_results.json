@@ -1,0 +1,37 @@
+[
+  {
+    "source": "Buendia - Instruccion.pdf",
+    "cer_base": 0.720353982300885,
+    "cer_finetuned": 0.6212389380530974,
+    "cer_pipeline": 0.6159292035398231,
+    "winner": "PIPELINE"
+  },
+  {
+    "source": "Guardiola - Tratado nobleza.pdf",
+    "cer_base": 0.40352697095435686,
+    "cer_finetuned": 0.41286307053941906,
+    "cer_pipeline": 0.40145228215767637,
+    "winner": "PIPELINE"
+  },
+  {
+    "source": "PORCONES.228.38 \u2013 1646.pdf",
+    "cer_base": 1.1272475795297372,
+    "cer_finetuned": 0.7081604426002767,
+    "cer_pipeline": 0.7095435684647303,
+    "winner": "FT"
+  },
+  {
+    "source": "PORCONES.23.5 - 1628.pdf",
+    "cer_base": 0.8928,
+    "cer_finetuned": 0.784,
+    "cer_pipeline": 0.7824,
+    "winner": "PIPELINE"
+  },
+  {
+    "source": "PORCONES.748.6 \u2013 1650.pdf",
+    "cer_base": 0.7744433688286544,
+    "cer_finetuned": 0.7589545014520813,
+    "cer_pipeline": 0.7589545014520813,
+    "winner": "FT"
+  }
+]

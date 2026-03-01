@@ -1,0 +1,43 @@
+# RenAIssance OCR Pipeline — Python Dependencies
+# GSoC 2026 | HumanAI Foundation / CERN
+#
+# Tested on: Google Colab (Python 3.12, CUDA 12.1, T4 GPU)
+#
+# Install:
+#   pip install -r requirements.txt
+#
+# System dependencies (not pip-installable — install separately):
+#   Ubuntu/Debian:  apt-get install -y poppler-utils tesseract-ocr tesseract-ocr-spa
+#   macOS:          brew install poppler tesseract
+#
+# Note: torch/torchvision install CUDA-enabled wheels automatically when
+# a GPU is detected. For CPU-only environments, replace with:
+#   pip install torch==2.5.1+cpu torchvision==0.20.1+cpu -f https://download.pytorch.org/whl/torch_stable.html
+
+# ── Deep Learning ─────────────────────────────────────────────────────────────
+torch==2.5.1
+torchvision==0.20.1
+
+# ── Transformers + Training ───────────────────────────────────────────────────
+# transformers>=4.36.0 required — no_cuda argument removed in 4.36, replaced by use_cpu
+transformers==4.47.1
+datasets==3.2.0
+accelerate==1.2.1        # Required by Seq2SeqTrainer for distributed/fp16 training
+
+# ── OCR + Document Processing ─────────────────────────────────────────────────
+pdf2image==1.17.0        # PDF → PIL Image (requires poppler system package)
+opencv-python==4.10.0.84
+Pillow==11.0.0
+pytesseract==0.3.13      # Python wrapper for Tesseract (requires tesseract system package)
+
+# ── Evaluation ────────────────────────────────────────────────────────────────
+jiwer==3.0.4             # WER and CER computation with character alignment
+
+# ── LLM Correction ────────────────────────────────────────────────────────────
+groq==0.13.0             # Groq API client (Llama-3.3-70b for semantic correction)
+
+# ── Data Science + Visualisation ─────────────────────────────────────────────
+numpy==2.0.2
+matplotlib==3.9.4
+seaborn==0.13.2
+scikit-learn==1.6.0      # confusion_matrix for character-level evaluation
