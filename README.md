@@ -10,12 +10,12 @@ The work was carried out as a GSoC 2026 contribution to the RenAIssance project 
 
 ## How it works
 
-1. **Layout analysis** â€” Extracts the main text block from scanned PDFs using adaptive Gaussian binarization, connected-component filtering, and Otsu projection profiling.
-2. **Tesseract silver reference** â€” Generates a deterministic OCR reference with `tesseract --oem 3 --psm 6 -l spa` on the cropped text block.
-3. **MAE self-supervised pre-training** â€” Trains a small Vision Transformer encoder on ~300â€“500 unlabeled line images with 75% of patches masked, so the model learns historical letterform structure from pixels alone.
-4. **Confidence-gated fine-tuning** â€” Transfers the MAE patch embeddings into TrOCR and fine-tunes only on lines where Tesseract's mean word confidence is at least 70%.
-5. **Quality-gated LLM correction** â€” Applies a constrained Llama 3.3-70B pass only when the TrOCR output passes Spanish character-ratio, digit-ratio, punctuation-density, and length-ratio checks.
-6. **Evaluation** â€” Reports character error rate (CER), word error rate (WER), and character confusion matrices against the Tesseract silver standard.
+1. **Layout analysis** - Extracts the main text block from scanned PDFs using adaptive Gaussian binarization, connected-component filtering, and Otsu projection profiling.
+2. **Tesseract silver reference** - Generates a deterministic OCR reference with `tesseract --oem 3 --psm 6 -l spa` on the cropped text block.
+3. **MAE self-supervised pre-training** - Trains a small Vision Transformer encoder on ~300-500 unlabeled line images with 75% of patches masked, so the model learns historical letterform structure from pixels alone.
+4. **Confidence-gated fine-tuning** - Transfers the MAE patch embeddings into TrOCR and fine-tunes only on lines where Tesseract's mean word confidence is at least 70%.
+5. **Quality-gated LLM correction** - Applies a constrained Llama 3.3-70B pass only when the TrOCR output passes Spanish character-ratio, digit-ratio, punctuation-density, and length-ratio checks.
+6. **Evaluation** - Reports character error rate (CER), word error rate (WER), and character confusion matrices against the Tesseract silver standard.
 
 ## Tech stack
 
@@ -31,13 +31,13 @@ The pipeline improves on the untuned TrOCR base model on all 5 test sources. CER
 
 | Source | Base CER | MAE+FT | Full Pipeline | Winner |
 |--------|:--------:|:------:|:-------------:|:------:|
-| Buendia â€” *Instruccion* (1740) | 72.0% | 62.1% | **61.6%** | Pipeline |
-| Guardiola â€” *Tratado nobleza* (1591) | 40.4% | 41.3% | **40.1%** | Pipeline |
+| Buendia - *Instruccion* (1740) | 72.0% | 62.1% | **61.6%** | Pipeline |
+| Guardiola - *Tratado nobleza* (1591) | 40.4% | 41.3% | **40.1%** | Pipeline |
 | PORCONES.228.38 (1646) | 112.7% | **70.8%** | 71.0% | FT |
 | PORCONES.23.5 (1628) | 89.3% | 78.4% | **78.2%** | Pipeline |
 | PORCONES.748.6 (1650) | 77.4% | **75.9%** | 75.9% | FT |
 
-The largest improvement is on PORCONES.228.38, where MAE+FT drops CER from 112.7% to 70.8% â€” an absolute reduction of about 42 percentage points (~37% relative). The full pipeline result for this source is 71.0%. This source was insertion-heavy at baseline; MAE pre-training on the actual historical glyphs appears to address the glyph-confusion problem behind the high insertion rate.
+The largest improvement is on PORCONES.228.38, where MAE+FT drops CER from 112.7% to 70.8% - an absolute reduction of about 42 percentage points (~37% relative). The full pipeline result for this source is 71.0%. This source was insertion-heavy at baseline; MAE pre-training on the actual historical glyphs appears to address the glyph-confusion problem behind the high insertion rate.
 
 ## How to run
 
